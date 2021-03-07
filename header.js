@@ -20,36 +20,21 @@ window.addEventListener("resize", NavChecker);
 
 const CloseMobileNav = () => {
   document.querySelector("header").classList.remove("open");
-
-  const documentBody = document.querySelector("body");
-  documentBody.style.margin = "0 auto";
-  documentBody.style.width = "auto";
 }
 
 
 const NavButtonClick = () => {
   const header = document.querySelector("header");
+  header.classList.add("open");
 
-  if (header.classList.contains("open")) {
-    CloseMobileNav();
-  } else {
-    header.classList.add("open");
+  const headerNavList = header.querySelector("nav ul");
+  headerNavList.addEventListener("click", CloseMobileNav);
 
-    const headerNavList = header.querySelector("nav ul");
-    headerNavList.addEventListener("click", CloseMobileNav);
-
-    const headerNavListWidth = headerNavList.clientWidth;
-
-    const documentBody = document.querySelector("body");
-    documentBody.style.width = documentBody.clientWidth + "px";
-    documentBody.style.marginLeft = headerNavListWidth + "px";
-
-    if (!document.querySelector("div.overlay")) {
-      const div = document.createElement("div");
-      div.classList.add("overlay");
-      div.addEventListener("click", CloseMobileNav);
-      header.appendChild(div);
-    }
+  if (!document.querySelector("div.overlay")) {
+    const div = document.createElement("div");
+    div.classList.add("overlay");
+    div.addEventListener("click", CloseMobileNav);
+    header.appendChild(div);
   }
 }
 document.querySelector("header nav button").addEventListener("click", NavButtonClick);
