@@ -1,22 +1,5 @@
 "use strict";
 
-const NavChecker = () => {
-  const windowWidth = window.innerWidth;
-
-  const header = document.querySelector("header");
-  header.classList.remove("mobile");
-
-  const headerWidth = header.scrollWidth;
-
-  if (headerWidth > windowWidth) {
-    header.classList.add("mobile");
-  } else {
-    CloseMobileNav();
-  }
-}
-window.addEventListener("load", NavChecker);
-window.addEventListener("resize", NavChecker);
-
 
 const CloseMobileNav = () => {
   document.querySelector("header").classList.remove("open");
@@ -31,10 +14,36 @@ const NavButtonClick = () => {
   headerNavList.addEventListener("click", CloseMobileNav);
 
   if (!document.querySelector("div.overlay")) {
-    const div = document.createElement("div");
-    div.classList.add("overlay");
-    div.addEventListener("click", CloseMobileNav);
-    header.appendChild(div);
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    overlay.addEventListener("click", CloseMobileNav);
+    header.appendChild(overlay);
   }
 }
-document.querySelector("header nav button").addEventListener("click", NavButtonClick);
+
+
+const NavChecker = () => {
+  const windowWidth = window.innerWidth;
+
+  const header = document.querySelector("header");
+  header.classList.remove("mobile");
+
+  const headerWidth = header.scrollWidth;
+
+  if (headerWidth > windowWidth) {
+    const headerNav = header.querySelector("nav");
+
+    if (!headerNav.querySelector(":scope > button")) {
+      const menuButton = document.createElement("button");
+      menuButton.innerHTML = "menu";
+      menuButton.addEventListener("click", NavButtonClick);
+      headerNav.appendChild(menuButton);
+    }
+
+    header.classList.add("mobile");
+  } else {
+    CloseMobileNav();
+  }
+}
+window.addEventListener("load", NavChecker);
+window.addEventListener("resize", NavChecker);
