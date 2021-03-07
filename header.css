@@ -96,6 +96,7 @@ header.mobile > nav > ul > li {
   border-bottom: thin solid var(--color-border);
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 header.mobile > nav > ul > li > a {
