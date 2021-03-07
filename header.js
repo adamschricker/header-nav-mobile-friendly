@@ -1,5 +1,12 @@
 "use strict";
 
+/******************************************************************/
+/** Header-Nav-Mobile-Friendly Javascript                        **/
+/** https://github.com/adamschricker/header-nav-mobile-friendly  **/
+/**                                                              **/
+/** Please contact if you have ideas or issues.                  **/
+/******************************************************************/
+
 
 const CloseMobileNav = () => {
   document.querySelector("header").classList.remove("open");
